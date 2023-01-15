@@ -15,6 +15,6 @@ class MessageService
         $telegram = new TelegramApi();
         $result = $telegram->send($message);
 
-        return ['record' => $id ? $msg->get($id) : null, 'telegram_result' => $result ? $result : $telegram->errorMessage()];
+        return ['record' => $id > 0 ? $msg->get($id) : null, 'telegram_result' => $result ?? $telegram->errorMessage()];
     }
 }

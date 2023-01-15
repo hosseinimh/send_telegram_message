@@ -33,7 +33,7 @@ abstract class Model
         return $this->onSelectQuery($query);
     }
 
-    protected function createRecord(array $data): mixed
+    protected function createRecord(array $data): int
     {
         [$keys, $values] = $this->prepareCreateItems($data);
         $query = sprintf('INSERT INTO `%s` (%s) VALUES (%s)', $this->tblName, $keys, $values);
@@ -43,13 +43,13 @@ abstract class Model
             $insertedId = intval($this->db->insert_id);
         }
 
-        return $insertedId > 0 ? $insertedId : false;
+        return $insertedId;
     }
 
     protected function updateRecord(array $data, string  $where = ''): bool
     {
         $subQuery = $this->prepareUpdateItems($data);
-        $where = $where === '' ? $where : ' WHERE ' . $where;
+        $where = $where === '' ? '' : ' WHERE ' . $where;
         $query = sprintf('UPDATE `%s` SET %s %s', $this->tblName, $subQuery, $where);
 
         return $this->onExecuteQuery($query);

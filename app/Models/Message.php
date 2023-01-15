@@ -29,7 +29,7 @@ class Message extends Model
         return null;
     }
 
-    public function create(string $message): mixed
+    public function create(string $message): int
     {
         try {
             $data = [
@@ -42,6 +42,6 @@ class Message extends Model
             printOutput($e->getMessage());
         }
 
-        return false;
+        return 0;
     }
 }

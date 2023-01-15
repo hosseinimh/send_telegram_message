@@ -10,12 +10,12 @@ class Singleton
 
     public static function getInstance(): Singleton
     {
-        $cls = static::class;
+        $class = static::class;
 
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
+        if (!isset(self::$instances[$class])) {
+            self::$instances[$class] = new static();
         }
 
-        return self::$instances[$cls];
+        return self::$instances[$class];
     }
 }

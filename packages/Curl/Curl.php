@@ -13,7 +13,7 @@ class Curl
         try {
             $this->error = null;
             $ch = curl_init($url);
-            $postFields = json_encode($postFields);
+            $postFields = $contentType === 'application/json' ? json_encode($postFields) : $postFields;
 
             curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: $contentType"]);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -25,11 +25,10 @@ class Curl
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
             $result = curl_exec($ch);
-            $curl_errno = curl_errno($ch);
 
             curl_close($ch);
 
-            if ($curl_errno > 0) {
+            if (curl_errno($ch) > 0) {
                 $this->error = curl_error($ch);
 
                 return null;
