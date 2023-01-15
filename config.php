@@ -1,6 +1,7 @@
 <?php
 
 const NAME = 'SendTelegramMessage';
+const ABS_PATH = __DIR__;
 
 const DB_HOST = 'localhost';
 const DB_USERNAME = 'root';
